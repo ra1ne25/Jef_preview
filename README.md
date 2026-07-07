@@ -33,6 +33,8 @@ If previews don't show up:
 
 ## Build from source
 
+### macOS
+
 For local testing (ad-hoc signing, no Apple certificates):
 
 ```bash
@@ -42,10 +44,56 @@ cp -R build/JefPreview.app /Applications/
 open /Applications/JefPreview.app
 ```
 
+### Windows
+
+Thumbnails and preview pane for `.jef` files in File Explorer (Quick Look equivalent).
+
+**Download:** `JefPreview-1.0.0-win-x64-setup.exe` from [releases](https://github.com/ra1ne25/Jef_preview/releases/latest).
+
+#### Installer
+
+1. Run `JefPreview-*-win-x64-setup.exe` as Administrator
+2. In Explorer: **View** → **Preview pane**
+3. Select a `.jef` file
+
+Requires [.NET 9 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/9.0). The installer checks and prompts if missing.
+
+Uninstall: **Settings → Apps → JefPreview → Uninstall**
+
+#### Build from source
+
+**Requirements:** Windows 10/11, [.NET 9 SDK](https://dotnet.microsoft.com/download)
+
+```powershell
+.\windows\scripts\build.ps1
+# Administrator PowerShell:
+.\windows\scripts\register.ps1
+```
+
+**Installer package:**
+
+```powershell
+winget install JRSoftware.InnoSetup
+.\windows\scripts\package.ps1
+```
+
+Full reinstall while developing: `.\windows\scripts\reinstall.ps1` (Administrator)
+
+In Explorer: enable **Preview pane** (View → Preview pane) and select a `.jef` file.
+
+Render test without registration:
+
+```powershell
+.\windows\build\JefPreview.Tools.exe render file.jef preview.png
+```
+
+Unregister: `.\windows\scripts\unregister.ps1`
+
 ## Project layout
 
 ```
 swift/          Xcode project (app + Quick Look extensions)
-scripts/        Build and packaging scripts
+windows/        Windows shell extension (C# + SharpShell)
+scripts/        Build and packaging scripts (macOS)
 samples/        Sample .jef file for testing
 ```

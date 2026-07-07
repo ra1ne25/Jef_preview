@@ -18,6 +18,10 @@ DerivedData/
 # Артефакты сборки
 *.pkg
 *.dmg
+windows/build/
+windows/dist/
+windows/**/bin/
+windows/**/obj/
 
 # Локальная документация (не для GitHub)
 BUILD_INSTRUCTIONS.md
