@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode / xcodegen
+build/
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Артефакты сборки
+*.pkg
+*.dmg
+
+# Локальная документация (не для GitHub)
+BUILD_INSTRUCTIONS.md
+
+# Секреты
+private.key
+*.p12
+*.pem

@@ -1,0 +1,52 @@
+# XcodeGen-спецификация. Генерация: cd swift && xcodegen generate
+name: JefPreview
+options:
+  deploymentTarget:
+    macOS: "12.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "12.0"
+    # Подписываем вручную в scripts/build_app.sh (inside-out, с entitlements)
+    CODE_SIGN_STYLE: Manual
+
+targets:
+  JefPreview:
+    type: application
+    platform: macOS
+    sources:
+      - App
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.flowdev.jefpreviwe
+        INFOPLIST_FILE: App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: App/App.entitlements
+    dependencies:
+      - target: JefThumbnail
+      - target: JefPreviewExt
+
+  JefThumbnail:
+    type: app-extension
+    platform: macOS
+    sources:
+      - ThumbnailExt
+      - Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.flowdev.jefpreviwe.thumbnail
+        INFOPLIST_FILE: ThumbnailExt/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Ext.entitlements
+
+  JefPreviewExt:
+    type: app-extension
+    platform: macOS
+    sources:
+      - PreviewExt
+      - Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.flowdev.jefpreviwe.preview
+        INFOPLIST_FILE: PreviewExt/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Ext.entitlements
